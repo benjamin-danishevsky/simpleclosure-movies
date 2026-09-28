@@ -6,3 +6,21 @@
   padding: 0;
   list-style: none;
 }
+
+.dense {
+  grid-auto-flow: dense;
+}
+
+.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Below two columns a spanning card would fill the viewport, so it goes back
+   to a normal cell. */
+@media (max-width: 480px) {
+  .featured {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}

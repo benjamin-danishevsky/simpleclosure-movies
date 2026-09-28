@@ -35,7 +35,7 @@ function App() {
         />
       </header>
       <main>
-        <MovieGrid movies={sortedMovies} />
+        <MovieGrid movies={sortedMovies} sortKey={sortKey} />
       </main>
       <footer>
         This product uses the TMDB API but is not endorsed or certified by TMDB.
