@@ -1,7 +1,6 @@
+import { posterUrl } from "../api/tmdb";
+import { MOVIE_PAGE_URL } from "../constants/config";
 import styles from "./MovieCard.module.css";
-
-const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342";
-const MOVIE_PAGE_URL = "https://www.themoviedb.org/movie";
 
 function MovieCard({ movie }) {
   const year = movie.release_date?.slice(0, 4);
@@ -15,7 +14,7 @@ function MovieCard({ movie }) {
     >
       <img
         className={styles.poster}
-        src={`${POSTER_BASE_URL}${movie.poster_path}`}
+        src={posterUrl(movie.poster_path)}
         alt=""
         loading="lazy"
       />
