@@ -22,6 +22,24 @@
   outline-offset: 2px;
 }
 
+.cardList {
+  display: flex;
+  align-items: flex-start;
+}
+
+.cardList .posterWrap {
+  flex: 0 0 120px;
+}
+
+.cardList .body {
+  flex: 1;
+}
+
+/* The poster is too small in list layout for overlaid text to be readable. */
+.cardList .overview {
+  display: none;
+}
+
 .posterWrap {
   position: relative;
   aspect-ratio: 2 / 3;

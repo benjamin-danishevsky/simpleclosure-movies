@@ -2,12 +2,16 @@ import { posterUrl } from "../api/tmdb";
 import { MOVIE_PAGE_URL } from "../constants/config";
 import styles from "./MovieCard.module.css";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, layout }) {
   const year = movie.release_date?.slice(0, 4);
+
+  const cardClassName = [styles.card, layout === "list" && styles.cardList]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <a
-      className={styles.card}
+      className={cardClassName}
       href={`${MOVIE_PAGE_URL}/${movie.id}`}
       target="_blank"
       rel="noopener noreferrer"

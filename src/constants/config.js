@@ -9,8 +9,14 @@ export const SORT_OPTIONS = [
   { value: "title", label: "Title" },
 ];
 
+export const LAYOUT_OPTIONS = [
+  { value: "grid", label: "Grid" },
+  { value: "list", label: "List" },
+];
+
 export const FEATURED_RATING = 8;
 
 export const DEFAULT_GENRE_ID = 28;
 export const DEFAULT_SORT_KEY = "rating";
 export const DEFAULT_SORT_DIRECTION = "desc";
+export const DEFAULT_LAYOUT = "grid";

@@ -11,6 +11,11 @@
   grid-auto-flow: dense;
 }
 
+/* Same specificity as .grid, so this must stay below it to win. */
+.list {
+  grid-template-columns: 1fr;
+}
+
 .featured {
   grid-column: span 2;
   grid-row: span 2;

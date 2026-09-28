@@ -28,3 +28,13 @@
 .toggle {
   cursor: pointer;
 }
+
+.toggleGroup {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.active {
+  color: var(--color-bg);
+  background: var(--color-accent);
+}

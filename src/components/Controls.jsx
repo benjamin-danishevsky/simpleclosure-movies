@@ -1,5 +1,5 @@
 import { GENRES } from "../constants/genres";
-import { SORT_OPTIONS } from "../constants/config";
+import { LAYOUT_OPTIONS, SORT_OPTIONS } from "../constants/config";
 import styles from "./Controls.module.css";
 
 function Controls({
@@ -9,6 +9,8 @@ function Controls({
   onSortKeyChange,
   sortDirection,
   onSortDirectionChange,
+  layout,
+  onLayoutChange,
 }) {
   return (
     <div className={styles.controls}>
@@ -49,6 +51,27 @@ function Controls({
       >
         {sortDirection === "desc" ? "↓ Descending" : "↑ Ascending"}
       </button>
+
+      <div className={styles.field}>
+        Layout
+        <div className={styles.toggleGroup}>
+          {LAYOUT_OPTIONS.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              className={[
+                styles.toggle,
+                layout === option.value && styles.active,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => onLayoutChange(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
