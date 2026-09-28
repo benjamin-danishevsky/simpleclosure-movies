@@ -20,13 +20,17 @@ function App() {
     loadMovies();
   }, []);
 
+  const sortedMovies = [...movies].sort(
+    (a, b) => b.vote_average - a.vote_average,
+  );
+
   return (
     <>
       <header>
         <h1>Movies</h1>
       </header>
       <main>
-        <MovieGrid movies={movies} />
+        <MovieGrid movies={sortedMovies} />
       </main>
       <footer>
         This product uses the TMDB API but is not endorsed or certified by TMDB.
