@@ -12,16 +12,19 @@ function MovieCard({ movie }) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img
-        className={styles.poster}
-        src={posterUrl(movie.poster_path)}
-        alt=""
-        loading="lazy"
-      />
+      <div className={styles.posterWrap}>
+        <img
+          className={styles.poster}
+          src={posterUrl(movie.poster_path)}
+          alt=""
+          loading="lazy"
+        />
+        <p className={styles.overview}>{movie.overview}</p>
+      </div>
       <div className={styles.body}>
         <h2 className={styles.title}>{movie.title}</h2>
         <p className={styles.meta}>
-          <span className={styles.rating}>{movie.vote_average}</span>
+          <span className={styles.rating}>{movie.vote_average.toFixed(1)}</span>
           <span>{year}</span>
         </p>
       </div>

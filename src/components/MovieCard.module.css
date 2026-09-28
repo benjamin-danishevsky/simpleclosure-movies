@@ -10,14 +10,45 @@
     box-shadow 200ms ease;
 }
 
-.card:hover {
+.card:hover,
+.card:focus-visible {
   transform: scale(1.03);
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.45);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.posterWrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
 }
 
 .poster {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overview {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: var(--space-3);
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+  background: rgb(0 0 0 / 0.85);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.card:hover .overview,
+.card:focus-visible .overview {
+  opacity: 1;
 }
 
 .body {
@@ -41,4 +72,16 @@
 .rating {
   color: var(--color-accent);
   font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .overview {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    transform: none;
+  }
 }
