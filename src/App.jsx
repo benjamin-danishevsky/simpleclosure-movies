@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import MovieGrid from "./components/MovieGrid";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -21,12 +22,15 @@ function App() {
 
   return (
     <>
-      <h1>Movies</h1>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
+      <header>
+        <h1>Movies</h1>
+      </header>
+      <main>
+        <MovieGrid movies={movies} />
+      </main>
+      <footer>
+        This product uses the TMDB API but is not endorsed or certified by TMDB.
+      </footer>
     </>
   );
 }
