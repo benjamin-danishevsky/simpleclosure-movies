@@ -1,18 +1,38 @@
+import { useMemo, useState } from "react";
+import Controls from "./components/Controls";
 import MovieGrid from "./components/MovieGrid";
 import { useMovies } from "./hooks/useMovies";
-import { DEFAULT_GENRE_ID } from "./constants/config";
+import { sortMovies } from "./utils/sortMovies";
+import {
+  DEFAULT_GENRE_ID,
+  DEFAULT_SORT_DIRECTION,
+  DEFAULT_SORT_KEY,
+} from "./constants/config";
 
 function App() {
-  const { movies } = useMovies(DEFAULT_GENRE_ID);
+  const [genreId, setGenreId] = useState(DEFAULT_GENRE_ID);
+  const [sortKey, setSortKey] = useState(DEFAULT_SORT_KEY);
+  const [sortDirection, setSortDirection] = useState(DEFAULT_SORT_DIRECTION);
 
-  const sortedMovies = [...movies].sort(
-    (a, b) => b.vote_average - a.vote_average,
+  const { movies } = useMovies(genreId);
+
+  const sortedMovies = useMemo(
+    () => sortMovies(movies, sortKey, sortDirection),
+    [movies, sortKey, sortDirection],
   );
 
   return (
     <>
       <header>
         <h1>Movies</h1>
+        <Controls
+          genreId={genreId}
+          onGenreChange={setGenreId}
+          sortKey={sortKey}
+          onSortKeyChange={setSortKey}
+          sortDirection={sortDirection}
+          onSortDirectionChange={setSortDirection}
+        />
       </header>
       <main>
         <MovieGrid movies={sortedMovies} />
