@@ -16,7 +16,6 @@ export function useMovies(genreId) {
         const results = await fetchMovies(genreId);
         setMovies(results);
         setStatus("success");
-        console.log(results);
       } catch (err) {
         setError(err);
         setStatus("error");

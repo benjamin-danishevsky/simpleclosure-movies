@@ -12,10 +12,8 @@ export async function fetchMovies(genreId) {
   }
 
   const data = await res.json();
-  console.log(data);
   return data.results;
 }
-
 
 export function posterUrl(posterPath) {
   return `${IMAGE_BASE_URL}/${POSTER_SIZE}${posterPath}`;
