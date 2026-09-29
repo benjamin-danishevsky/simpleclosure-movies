@@ -5,10 +5,12 @@ export function useMovies(genreId) {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     async function loadMovies() {
       setStatus("loading");
+      setError(null);
 
       try {
         const results = await fetchMovies(genreId);
@@ -22,7 +24,11 @@ export function useMovies(genreId) {
     }
 
     loadMovies();
-  }, [genreId]);
+  }, [genreId, reloadKey]);
 
-  return { movies, status, error };
+  function reload() {
+    setReloadKey((key) => key + 1);
+  }
+
+  return { movies, status, error, reload };
 }

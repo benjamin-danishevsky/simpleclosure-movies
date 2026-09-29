@@ -9,6 +9,7 @@ import {
   DEFAULT_SORT_DIRECTION,
   DEFAULT_SORT_KEY,
 } from "./constants/config";
+import styles from "./App.module.css";
 
 function App() {
   const [genreId, setGenreId] = useState(DEFAULT_GENRE_ID);
@@ -16,12 +17,35 @@ function App() {
   const [sortDirection, setSortDirection] = useState(DEFAULT_SORT_DIRECTION);
   const [layout, setLayout] = useState(DEFAULT_LAYOUT);
 
-  const { movies } = useMovies(genreId);
+  const { movies, status, error, reload } = useMovies(genreId);
 
   const sortedMovies = useMemo(
     () => sortMovies(movies, sortKey, sortDirection),
     [movies, sortKey, sortDirection],
   );
+
+  let content;
+  if (status === "error") {
+    content = (
+      <div className={styles.status}>
+        <p>Could not load movies. {error.message}</p>
+        <button type="button" className={styles.retry} onClick={reload}>
+          Retry
+        </button>
+      </div>
+    );
+  } else if (status === "success" && sortedMovies.length === 0) {
+    content = <p className={styles.status}>No movies found for this genre.</p>;
+  } else {
+    content = (
+      <MovieGrid
+        movies={sortedMovies}
+        sortKey={sortKey}
+        layout={layout}
+        loading={status === "loading"}
+      />
+    );
+  }
 
   return (
     <>
@@ -38,9 +62,7 @@ function App() {
           onLayoutChange={setLayout}
         />
       </header>
-      <main>
-        <MovieGrid movies={sortedMovies} sortKey={sortKey} layout={layout} />
-      </main>
+      <main>{content}</main>
       <footer>
         This product uses the TMDB API but is not endorsed or certified by TMDB.
       </footer>

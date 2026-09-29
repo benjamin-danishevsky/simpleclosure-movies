@@ -16,6 +16,9 @@ export const LAYOUT_OPTIONS = [
 
 export const FEATURED_RATING = 8;
 
+// TMDB returns 20 results per page, so the skeleton fills the same space.
+export const SKELETON_COUNT = 20;
+
 export const DEFAULT_GENRE_ID = 28;
 export const DEFAULT_SORT_KEY = "rating";
 export const DEFAULT_SORT_DIRECTION = "desc";

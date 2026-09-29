@@ -1,0 +1,15 @@
+.status {
+  padding-block: var(--space-5);
+  color: var(--color-text-muted);
+}
+
+.retry {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+}

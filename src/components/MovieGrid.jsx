@@ -1,8 +1,9 @@
 import MovieCard from "./MovieCard";
-import { FEATURED_RATING } from "../constants/config";
+import MovieCardSkeleton from "./MovieCardSkeleton";
+import { FEATURED_RATING, SKELETON_COUNT } from "../constants/config";
 import styles from "./MovieGrid.module.css";
 
-function MovieGrid({ movies, sortKey, layout }) {
+function MovieGrid({ movies, sortKey, layout, loading }) {
   const isGrid = layout === "grid";
 
   // Dense packing backfills gaps with later movies, which only reads correctly
@@ -15,9 +16,13 @@ function MovieGrid({ movies, sortKey, layout }) {
     .filter(Boolean)
     .join(" ");
 
-  return (
-    <ul className={gridClassName}>
-      {movies.map((movie) => (
+  const items = loading
+    ? Array.from({ length: SKELETON_COUNT }, (_, index) => (
+        <li key={index}>
+          <MovieCardSkeleton />
+        </li>
+      ))
+    : movies.map((movie) => (
         <li
           key={movie.id}
           className={
@@ -28,9 +33,9 @@ function MovieGrid({ movies, sortKey, layout }) {
         >
           <MovieCard movie={movie} layout={layout} />
         </li>
-      ))}
-    </ul>
-  );
+      ));
+
+  return <ul className={gridClassName}>{items}</ul>;
 }
 
 export default MovieGrid;
