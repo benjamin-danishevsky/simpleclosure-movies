@@ -28,7 +28,9 @@ function MovieCard({ movie, layout }) {
       <div className={styles.body}>
         <h2 className={styles.title}>{movie.title}</h2>
         <p className={styles.meta}>
-          <span className={styles.rating}>{movie.vote_average.toFixed(1)}</span>
+          <span className={styles.rating}>
+            {movie.vote_average?.toFixed(1) ?? "—"}
+          </span>
           <span>{year}</span>
         </p>
       </div>

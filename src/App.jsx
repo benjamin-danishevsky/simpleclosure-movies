@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import Controls from "./components/Controls";
+import ErrorBoundary from "./components/ErrorBoundary";
 import MovieGrid from "./components/MovieGrid";
 import { useMovies } from "./hooks/useMovies";
 import { sortMovies } from "./utils/sortMovies";
@@ -62,7 +63,17 @@ function App() {
           onLayoutChange={setLayout}
         />
       </header>
-      <main>{content}</main>
+      <main>
+        <ErrorBoundary
+          fallback={
+            <p className={styles.status}>
+              Something went wrong showing these movies.
+            </p>
+          }
+        >
+          {content}
+        </ErrorBoundary>
+      </main>
       <footer>
         This product uses the TMDB API but is not endorsed or certified by TMDB.
       </footer>
