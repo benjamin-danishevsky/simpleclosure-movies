@@ -8,21 +8,29 @@ export function useMovies(genreId) {
   const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function loadMovies() {
       setStatus("loading");
       setError(null);
 
       try {
-        const results = await fetchMovies(genreId);
+        const results = await fetchMovies(genreId, controller.signal);
         setMovies(results);
         setStatus("success");
       } catch (err) {
+        // A superseded request is not a failure, and its component may already
+        // be showing newer results.
+        if (err.name === "AbortError") return;
+
         setError(err);
         setStatus("error");
       }
     }
 
     loadMovies();
+
+    return () => controller.abort();
   }, [genreId, reloadKey]);
 
   function reload() {
